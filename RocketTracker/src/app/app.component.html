@@ -1,0 +1,18 @@
+<h1>Welcome to Rocket League Tracker</h1>
+
+<div class="unauthorized" *ngIf="!user">
+  <p>Noch nicht eingeloggt...</p>
+</div>
+
+<div class="authorized" *ngIf="user">
+  <code>Willkommen User:</code> {{ user?.uid }}
+  <div class="rocketPlayersContainer" *ngIf="rocketPlayers">
+    
+    <div class="rockerPlayer" *ngFor="let player of rocketPlayers | async">
+      <p><strong>Spieler-Id: {{ player.id }}</strong></p>
+      <p>Name: {{ player.name }}</p>
+      <p>Letztes Login: {{ player.lastSubscribeTime.toMillis() | date:'dd.MM.yyyy h:mm' }}</p>
+    </div>
+  </div>
+
+</div>
