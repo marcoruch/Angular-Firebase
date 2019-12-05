@@ -1,0 +1,106 @@
+<button  mat-raised-button (click)="toggleModal()">
+  <mat-icon>exit_to_app</mat-icon>
+</button>
+
+<div class="login-modal" *ngIf="modalVisible">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="E-Mail" [(ngModel)]="username" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr *ngIf="loginErrorMsg">
+            <td>
+              <mat-error>{{loginErrorMsg}}</mat-error>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="submitLogin()" color="primary">Einloggen</button>
+      <button mat-raised-button (click)="toggleRegisterModal()" color="primary">Registrieren</button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+
+
+
+<div class="register-modal" *ngIf="registerModalVisible">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <mat-card-title>Registrieren</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form class="example-form">
+        <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="E-Mail" [(ngModel)]="email" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+              </mat-form-field>
+            </td>
+          </tr>
+
+          <tr>
+              <td>
+                <mat-form-field class="example-full-width">
+                  <input type="number" matInput placeholder="Alter" [(ngModel)]="userAge" name="username" required>
+                </mat-form-field>
+              </td>
+            </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="example-full-width">
+                <input matInput placeholder="Password" [(ngModel)]="repeatPassword" type="password" name="password"
+                  required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr *ngIf="registerErrorMsg">
+            <td>
+              <mat-error>{{registerErrorMsg}}</mat-error>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button (click)="submitRegister()" color="primary">Registrieren</button>
+      <button mat-raised-button (click)="toggleModal()" color="primary">Zurück zum Login</button>
+    </mat-card-actions>
+  </mat-card>
+</div>

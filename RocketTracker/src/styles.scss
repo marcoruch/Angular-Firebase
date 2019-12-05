@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css";
+
 html, body {
     background-color: #232429;
     color: grey;
-    padding: 10px;
-    
+    margin:0;
+    padding:0;
 }
