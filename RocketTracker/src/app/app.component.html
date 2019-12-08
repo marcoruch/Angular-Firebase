@@ -1,29 +1,23 @@
-
-
 <div class="master-layout">
   <div class="header">
     <ul>
-      <li class="logo"><p class="logo-text">Welcome to Rocket League Tracker</p></li>
-      <li class="login" *ngIf="!user"><app-login-register-modal></app-login-register-modal></li>
-      <li class="loggedInButtonsHolder" *ngIf="user"><app-user-profile-button [user]="user"></app-user-profile-button><app-logout-section></app-logout-section></li>
+      <li class="logo">
+        <p class="logo-text">Welcome to Rocket League Tracker</p>
+      </li>
+      <li class="login" *ngIf="!authService.isLoggedIn()">
+        <app-login-register-modal></app-login-register-modal>
+      </li>
+      <li class="loggedInButtonsHolder" *ngIf="authService.isLoggedIn()">
+        <app-user-profile-button [user]="user"></app-user-profile-button>
+        <app-logout-section></app-logout-section>
+      </li>
     </ul>
   </div>
-  
-  <div class="unauthorized" *ngIf="!user">
-    <p>Noch nicht eingeloggt...</p>
+
+  <div *ngIf="!authService.isLoggedIn()">
+      <mat-toolbar>Unauthentifiziert. Bitte einloggen.</mat-toolbar>
   </div>
-
-  <div class="authorized" *ngIf="user">
-    
-    <div class="rocketPlayersContainer" *ngIf="rocketPlayers">
-
-      <div class="rockerPlayer" *ngFor="let player of rocketPlayers | async">
-        <p><strong>Spieler-Id: {{ player.id }}</strong></p>
-        <p>Name: {{ player.name }}</p>
-        <p>Letztes Login: {{ player.lastSubscribeTime.toMillis() | date:'dd.MM.yyyy h:mm' }}</p>
-      </div>
-    </div>
-
+  <div class="page-content">
+    <router-outlet></router-outlet>
   </div>
-
 </div>

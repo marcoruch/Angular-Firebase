@@ -20,7 +20,7 @@
           <tr>
             <td>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="password" type="password" name="password" required>
+                <input matInput placeholder="Password" [(ngModel)]="password" (keydown.enter)="submitLogin()" type="password" name="password" required>
               </mat-form-field>
             </td>
           </tr>
@@ -84,7 +84,7 @@
           <tr>
             <td>
               <mat-form-field class="example-full-width">
-                <input matInput placeholder="Password" [(ngModel)]="repeatPassword" type="password" name="password"
+                <input matInput placeholder="Password" (keydown.enter)="submitRegister()" [(ngModel)]="repeatPassword" type="password" name="password"
                   required>
               </mat-form-field>
             </td>

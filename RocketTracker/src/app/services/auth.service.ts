@@ -13,7 +13,6 @@ import { EMPTY } from 'rxjs'
 export class AuthService {
 
     user: Observable<firebase.User | null>;
-
     usersPath: string = 'users';
 
     constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
@@ -41,8 +40,12 @@ export class AuthService {
             .catch((e) => console.log(e));
     }
 
-    async signOut() {
+    signOut() {
         this.afAuth.auth.signOut();
+    }
+
+    isLoggedIn() {
+        return this.afAuth.auth.currentUser ? true : false;
     }
 
     anonymousLogin() {

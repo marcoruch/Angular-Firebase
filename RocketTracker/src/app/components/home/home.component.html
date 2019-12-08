@@ -1,0 +1,13 @@
+<mat-toolbar>Dashboard</mat-toolbar>
+
+<div class="rocketPlayersContainer" *ngIf="rocketPlayers; else loading">
+
+  <div class="rockerPlayer" *ngFor="let player of rocketPlayers | async">
+    <p><strong>Spieler-Id: {{ player.id }}</strong></p>
+    <p>Name: {{ player.name }}</p>
+    <p>Letztes Login: {{ player.lastSubscribeTime.toMillis() | date:'dd.MM.yyyy h:mm' }}</p>
+  </div>
+</div>
+<ng-template #loading>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</ng-template>

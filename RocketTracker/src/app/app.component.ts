@@ -18,16 +18,13 @@ import { EMPTY } from 'rxjs'
 })
 export class AppComponent implements OnInit {
 
-  rocketPlayers: Observable<RocketPlayer[]>
   user: Observable<AdditionalUserInfo>;
 
-  constructor(private rocketPlayerService: RocketPlayerService,
-    private userInfoService: UserInfoService,
+  constructor(private userInfoService: UserInfoService,
     private authService: AuthService) {
   }
 
   HandleUserUpdate(currentUser: firebase.User) {
-    console.log(currentUser);
     if (currentUser == null) {
       this.user = EMPTY;
     } else {
@@ -40,7 +37,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.rocketPlayers = this.rocketPlayerService.rocketPlayers;
     this.authService.user.subscribe(currentUser => this.HandleUserUpdate(currentUser));
   }
 }

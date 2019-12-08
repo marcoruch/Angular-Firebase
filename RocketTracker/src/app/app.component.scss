@@ -2,6 +2,11 @@
   width: 100%;
   height: 100%;
 
+  .page-content {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
   .header {
     padding: 0;
     border-top: 2px dotted #FFD700;
@@ -16,7 +21,7 @@
       align-content: center;
       align-items: center;
       list-style: none;
-      
+
       li {
 
 
@@ -33,42 +38,13 @@
 
       }
 
-       li.loggedInButtonsHolder {
-        margin-left: auto !important; 
+      li.loggedInButtonsHolder {
+        margin-left: auto !important;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-content: space-between;
         align-items: space-between;
-      }
-    }
-  }
-
-  .unauthorized {
-    background-color: coral;
-    padding: 20px;
-    width: 200px;
-
-    p {
-      font-size: 16px;
-      font-weight: bold;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-  }
-
-  .authorized {
-    code {
-      margin-left: 10px;
-    }
-
-    .rocketPlayersContainer {
-      display: flex;
-      flex-direction: column;
-
-      .rockerPlayer {
-        background-color: #43495B;
-        color: #C1C9DA;
-        margin: 10px;
       }
     }
   }
