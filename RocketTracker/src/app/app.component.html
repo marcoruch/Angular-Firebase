@@ -14,10 +14,12 @@
     </ul>
   </div>
 
-  <div *ngIf="!authService.isLoggedIn()">
+  <div *ngIf="!authService.isLoggedIn(); else pageContent">
       <mat-toolbar>Unauthentifiziert. Bitte einloggen.</mat-toolbar>
   </div>
-  <div class="page-content">
-    <router-outlet></router-outlet>
-  </div>
+  <ng-template #pageContent>
+    <div class="page-content">
+          <router-outlet></router-outlet>
+    </div>
+  </ng-template>
 </div>

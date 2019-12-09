@@ -1,13 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-
-import { RocketPlayerService } from './services/rocket-player.service';
-import { RocketPlayer } from './models/rocket-player';
 import { AuthService } from './services/auth.service';
-import { map } from 'rxjs/operators';
 import { AdditionalUserInfo } from './models/additional-user-info';
 import { UserInfoService } from './services/user-info.service';
-import { filter } from 'rxjs/operators'
 import { EMPTY } from 'rxjs'
 
 

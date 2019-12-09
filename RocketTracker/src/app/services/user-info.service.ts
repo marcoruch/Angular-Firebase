@@ -26,4 +26,8 @@ export class UserInfoService {
     GetByUid(uid: string): Observable<AdditionalUserInfo> {
         return this.additionalUserInfosCollection.doc<AdditionalUserInfo>(uid).valueChanges();
     }
+
+    GetByUids(uids: string[]): Observable<AdditionalUserInfo[]> {
+        return this.db.collection<AdditionalUserInfo>('users', ref => ref.where('id', 'in', uids)).valueChanges();
+    }
 }

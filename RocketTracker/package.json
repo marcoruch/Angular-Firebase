@@ -23,6 +23,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@swimlane/ngx-charts": "^12.1.0",
     "@types/rx": "^4.1.1",
     "angularfire2": "^5.2.3",
     "concurrently": "^5.0.0",

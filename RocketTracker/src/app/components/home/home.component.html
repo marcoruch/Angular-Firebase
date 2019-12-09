@@ -1,12 +1,12 @@
 <mat-toolbar>Dashboard</mat-toolbar>
 
-<div class="rocketPlayersContainer" *ngIf="rocketPlayers; else loading">
+<div class="statistics-container">
+  <mat-chip-list aria-label="Statistics">
+    <mat-chip *ngIf="rocketPlayers; else loading" color="accent" selected>Registrierte Spieler:
+      {{ (rocketPlayers | async)?.length }}</mat-chip>
+  </mat-chip-list>
+  <app-daily-player-ranking></app-daily-player-ranking>
 
-  <div class="rockerPlayer" *ngFor="let player of rocketPlayers | async">
-    <p><strong>Spieler-Id: {{ player.id }}</strong></p>
-    <p>Name: {{ player.name }}</p>
-    <p>Letztes Login: {{ player.lastSubscribeTime.toMillis() | date:'dd.MM.yyyy h:mm' }}</p>
-  </div>
 </div>
 <ng-template #loading>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>

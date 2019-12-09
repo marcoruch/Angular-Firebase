@@ -22,6 +22,8 @@ import { UserProfileButtonComponent } from './components/user-profile-button/use
 import { AppRoutingModule } from './app-routing.module';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomeComponent } from './components/home/home.component';
+import { DailyPlayerRankingComponent } from './components/daily-player-ranking/daily-player-ranking.component';
+import { NgxChartingModule } from './core/ngx-charting.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { HomeComponent } from './components/home/home.component';
     UserProfileButtonComponent,
     UserProfileComponent,
     HomeComponent,
+    DailyPlayerRankingComponent,
     /*=============*/
   ],
   imports: [
@@ -41,6 +44,7 @@ import { HomeComponent } from './components/home/home.component';
     AngularFirestoreModule,
     AngularFireAuthModule,
     CustomMaterialModule,
+    NgxChartingModule,
     FormsModule,
     BrowserAnimationsModule,
     AppRoutingModule

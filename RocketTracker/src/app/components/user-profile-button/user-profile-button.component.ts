@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AdditionalUserInfo } from 'src/app/models/additional-user-info';
+import { AdditionalUserInfo } from '../../models/additional-user-info';
 import { Observable } from 'rxjs';
 
 @Component({

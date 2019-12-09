@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RocketPlayerService } from 'src/app/services/rocket-player.service';
 import { Observable } from 'rxjs';
-import { RocketPlayer } from 'src/app/models/rocket-player';
+import { RocketPlayer } from '../../models/rocket-player';
 
 @Component({
   selector: 'app-home',
@@ -18,5 +18,4 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.rocketPlayers = this.rocketPlayerService.rocketPlayers;
   }
-
 }

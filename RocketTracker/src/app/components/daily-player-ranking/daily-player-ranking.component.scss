@@ -1,0 +1,10 @@
+.rankingContainer {
+  .ngx-charts text {
+    color: #fff !important;
+  }
+
+}
+
+::ng-deep .ngx-charts { 
+        fill: #fff!important;   
+}
