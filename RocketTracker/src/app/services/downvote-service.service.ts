@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Downvote } from '../models/votes';
+import { Downvotes } from '../models/votes';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,6 @@ export class DownvoteService {
 
 
   GetByRankingId(id: string){
-    return this.db.collection('rocketranking').doc(id).collection<Downvote>('downvotes').valueChanges();
+    return this.db.collection('rocketranking').doc(id).collection<Downvotes>('downvotes').valueChanges().pipe(take(1));
   }
 }

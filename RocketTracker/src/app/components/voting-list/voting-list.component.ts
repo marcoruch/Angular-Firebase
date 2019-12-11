@@ -1,0 +1,58 @@
+import { Component, OnInit, Input } from '@angular/core';
+import { Downvotes, Upvotes } from 'src/app/models/votes';
+import { Observable, forkJoin } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
+import { map } from 'rxjs/operators';
+import { RocketPlayer } from 'src/app/models/rocket-player';
+
+@Component({
+  selector: 'app-voting-list',
+  templateUrl: './voting-list.component.html',
+  styleUrls: ['./voting-list.component.scss']
+})
+export class VotingListComponent implements OnInit {
+
+  // Inputs
+  @Input() upvotes: Upvotes;
+  @Input() downvotes: Downvotes;
+  @Input() rocketPlayersOfTheDay: RocketPlayer[];
+
+  user: Observable<firebase.User>;
+
+  // Properties
+  userCanUpvote: boolean = false;
+  userCanDownvote: boolean = false;
+
+  constructor(private afAuth: AuthService) {
+    this.user = this.afAuth.user;
+  }
+
+  ngOnInit() {
+    this.user.subscribe(x => console.log(x))
+    console.log(this.upvotes);
+    console.log(this.downvotes);
+    console.log(this.rocketPlayersOfTheDay);
+    this.user.subscribe(user => {
+      this.userCanUpvote = this.UserCanUpvote(this.upvotes.uids, user.uid);
+      this.userCanDownvote = this.UserCanDownvote(this.downvotes.uids, user.uid);
+    }
+    );
+  }
+
+  private UserCanUpvote(uids: string[], uid: string) {
+    return !(uids.filter(x => x === uid).length > 0);
+  }
+
+  private UserCanDownvote(uids: string[], uid: string) {
+    return !(uids.filter(x => x === uid).length > 0);
+  }
+
+  Upvoted(uid: string) {
+console.log(uid);
+  }
+
+  Downvoted(uid: string) {
+
+    console.log(uid);
+  }
+}

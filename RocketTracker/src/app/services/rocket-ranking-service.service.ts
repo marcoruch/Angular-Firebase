@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RocketPlayer } from '../models/rocket-player';
 import { RocketRanking } from '../models/rocket-ranking';
@@ -16,18 +16,17 @@ import {
   DocumentSnapshotExists,
 } from 'angularfire2/firestore';
 import { RocketPlayerService } from './rocket-player.service';
+import DateUtils from '../helpers/DateUtils';
 @Injectable({
   providedIn: 'root'
 })
 export class RocketRankingService {
 
-  rocketPlayersCollection: AngularFirestoreCollection<RocketRanking>;
-  rocketRankings: Observable<RocketRanking[]>;
+  constructor(private db: AngularFirestore) {
+  }
 
-  constructor(private db: AngularFirestore, private rocketPlayerService: RocketPlayerService) {
- 
-    this.rocketPlayersCollection = this.db.collection("rocketranking");
-    this.rocketRankings = this.rocketPlayersCollection.snapshotChanges().pipe(map(actions => {
+  GetByDate(date: Date): Observable<RocketRanking[]> {
+    return this.db.collection("rocketranking", ref => ref/*.where("rankingDate", ">=", '2019-01-12')*/.limit(1)).snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as RocketRanking;
         data.id = a.payload.doc.id;

@@ -24,6 +24,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { HomeComponent } from './components/home/home.component';
 import { DailyPlayerRankingComponent } from './components/daily-player-ranking/daily-player-ranking.component';
 import { NgxChartingModule } from './core/ngx-charting.module';
+import { VotingListComponent } from './components/voting-list/voting-list.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NgxChartingModule } from './core/ngx-charting.module';
     UserProfileComponent,
     HomeComponent,
     DailyPlayerRankingComponent,
+    VotingListComponent,
     /*=============*/
   ],
   imports: [

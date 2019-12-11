@@ -1,10 +1,14 @@
 .rankingContainer {
+
+  display:flex;
+  flex-direction: column;
+
   .ngx-charts text {
     color: #fff !important;
   }
 
 }
 
-::ng-deep .ngx-charts { 
-        fill: #fff!important;   
+::ng-deep .ngx-charts {
+  fill: #fff !important;
 }

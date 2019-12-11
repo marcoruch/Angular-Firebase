@@ -4,19 +4,16 @@
     <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
       [results]="rocketRankingData" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
       [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+      [yAxisLabel]="yAxisLabel">
     </ngx-charts-bar-vertical>
   </div>
-
-  <div *ngIf="rocketRanking && isCurrentRanking && userCanChooseDown">
-    <h3>MVP Wählen:  <mat-icon>thumbs_down</mat-icon>
-    </h3>
-    <mat-chip-list aria-label="Statistics">
-      <mat-chip color="accent" selected *ngFor="let player of rocketRanking.players">
-        {{ player.name}}
-      </mat-chip>
-    </mat-chip-list>
+  <div *ngIf="rocketRanking && isCurrentRanking && upVotes && downVotes">
+    <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketPlayersOfTheDay]="rocketRanking.players">
+    </app-voting-list>
   </div>
+
+
+
 
   <ng-template #loading>
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>

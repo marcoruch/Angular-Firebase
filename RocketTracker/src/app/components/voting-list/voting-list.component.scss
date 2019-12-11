@@ -1,0 +1,22 @@
+ul.voting-list {
+
+  li {
+    list-style: none;
+
+    button {
+      margin-right: 10px;
+
+      .upvote-icon {
+        color: rgb(97, 255, 131);
+      }
+
+      /* Note: If you're using an SVG icon, you should make the class target the `<svg>` element */
+      .downvote-icon {
+        color: rgb(255, 97, 97);
+      }
+    }
+
+  }
+
+
+}

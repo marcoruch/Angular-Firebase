@@ -1,11 +1,9 @@
-export interface Upvote {
+export interface Upvotes {
     id: string,
-    forUid: string,
-    fromUid: string,
+    uids: string[],
 }
 
-export interface Downvote {
+export interface Downvotes {
     id: string,
-    forUid: string,
-    fromUid: string,
+    uids: string[],
 }
