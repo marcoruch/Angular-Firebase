@@ -4,6 +4,8 @@ import { Observable, forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { map } from 'rxjs/operators';
 import { RocketPlayer } from 'src/app/models/rocket-player';
+import { UpvoteService } from 'src/app/services/upvote-service.service';
+import { DownvoteService } from 'src/app/services/downvote-service.service';
 
 @Component({
   selector: 'app-voting-list',
@@ -13,17 +15,19 @@ import { RocketPlayer } from 'src/app/models/rocket-player';
 export class VotingListComponent implements OnInit {
 
   // Inputs
+  @Input() rocketRankingId: string;
   @Input() upvotes: Upvotes;
   @Input() downvotes: Downvotes;
   @Input() rocketPlayersOfTheDay: RocketPlayer[];
 
+  userUid: string;
   user: Observable<firebase.User>;
 
   // Properties
   userCanUpvote: boolean = false;
   userCanDownvote: boolean = false;
 
-  constructor(private afAuth: AuthService) {
+  constructor(private afAuth: AuthService, private upvoteService: UpvoteService, private downvoteService: DownvoteService) {
     this.user = this.afAuth.user;
   }
 
@@ -33,6 +37,7 @@ export class VotingListComponent implements OnInit {
     console.log(this.downvotes);
     console.log(this.rocketPlayersOfTheDay);
     this.user.subscribe(user => {
+      this.userUid = user.uid;
       this.userCanUpvote = this.UserCanUpvote(this.upvotes.uids, user.uid);
       this.userCanDownvote = this.UserCanDownvote(this.downvotes.uids, user.uid);
     }
@@ -48,11 +53,10 @@ export class VotingListComponent implements OnInit {
   }
 
   Upvoted(uid: string) {
-console.log(uid);
+     this.upvoteService.AddUpvote(uid,this.userUid, this.rocketRankingId)
   }
 
   Downvoted(uid: string) {
-
-    console.log(uid);
+   // this.downvoteService(uid,this.userUid, this.rocketRankingId)
   }
 }

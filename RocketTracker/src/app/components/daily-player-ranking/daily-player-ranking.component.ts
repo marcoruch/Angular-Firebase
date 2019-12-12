@@ -65,13 +65,15 @@ export class DailyPlayerRankingComponent implements OnInit {
         let rocketRanking = x[0];
         this.rocketRanking = rocketRanking;
         this.rocketRankingData = this.GetRocketRankingData(rocketRanking);
-        this.chartTitle = this.GetRocketRankingChartTitle(rocketRanking);
         this.isCurrentRanking = this.IsCurrentRanking(rocketRanking);
         this.downVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.downVotes = x[0]);
         this.upVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.upVotes = x[0]);
       } else {
+        this.rocketRanking = this.rocketRankingData = null;
         this.error = true;
       }
+      
+      this.chartTitle = this.GetRocketRankingChartTitle(changes.date.currentValue);
 
     }, err => this.error = true);
   }
@@ -82,8 +84,8 @@ export class DailyPlayerRankingComponent implements OnInit {
     })
   }
 
-  GetRocketRankingChartTitle(rocketRanking: RocketRanking) {
-    return `Rangliste ${rocketRanking.rankingDate.toDate().toLocaleDateString('de-DE', this.options)}`;
+  GetRocketRankingChartTitle(currentDate: Date) {
+    return `Rangliste ${currentDate.toLocaleDateString('de-DE', this.options)}`;
   }
 
   IsCurrentRanking(rocketRanking: RocketRanking) {

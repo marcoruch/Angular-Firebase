@@ -1,6 +1,7 @@
 <div class="rankingContainer">
-  <div *ngIf="rocketRankingData; else loading">
     <h3>{{chartTitle}}</h3>
+  <div *ngIf="rocketRanking && rocketRankingData; else loading">
+    
     <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
       [results]="rocketRankingData" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
       [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
@@ -8,14 +9,20 @@
     </ngx-charts-bar-vertical>
   </div>
   <div *ngIf="rocketRanking && isCurrentRanking && upVotes && downVotes">
-    <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketPlayersOfTheDay]="rocketRanking.players">
+    <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketRankingId]="rocketRanking.id" [rocketPlayersOfTheDay]="rocketRanking.players">
     </app-voting-list>
   </div>
 
 
 
-
   <ng-template #loading>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <ng-container *ngIf="!error; else error">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+
+      </ng-container>
+  </ng-template>
+
+  <ng-template #error>
+    Kein Ranking zu diesem Datum gefunden.
   </ng-template>
 </div>

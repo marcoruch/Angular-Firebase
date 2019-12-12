@@ -4,6 +4,7 @@ export interface RocketRanking {
     /** This property represents the RocketRanking Document-Id ... */
     id: string;
     rankingDate: firestore.Timestamp;
+    rankingDateAsStr: string;
     winnerId: string;
     players: RocketRankingPlayerData[]
 }

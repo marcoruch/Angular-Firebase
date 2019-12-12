@@ -23,10 +23,12 @@ import DateUtils from '../helpers/DateUtils';
 export class RocketRankingService {
 
   constructor(private db: AngularFirestore) {
+    
   }
 
   GetByDate(date: Date): Observable<RocketRanking[]> {
-    return this.db.collection("rocketranking", ref => ref/*.where("rankingDate", ">=", '2019-01-12')*/.limit(1)).snapshotChanges().pipe(map(actions => {
+    // Since Querying by Date doesn't seem to function properly, each RocketRanking-Document owns an additional String-Property with the Date.
+    return this.db.collection("rocketranking", ref => ref.where("rankingDateAsStr", "==", DateUtils.ToddMMyyyy(date)).limit(1)).snapshotChanges().pipe(map(actions => {
       return actions.map(a => {
         const data = a.payload.doc.data() as RocketRanking;
         data.id = a.payload.doc.id;
