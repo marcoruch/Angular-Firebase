@@ -56,8 +56,8 @@ function ToddMMyyyy(date) {
 exports.rocketTrackerRanking = functions.region('europe-west1').pubsub
     .schedule('01 00 * * *').onRun(async context => {
         await firestore.collection('rocketranking').add({
-            rankingDate: admin.firestore.Timestamp.now(),
-            rankingDateAsStr: ToddMMyyyy(new Date()),
+            rankingDate: admin.firestore.Timestamp.now().toDate(),
+            rankingDateAsStr: ToddMMyyyy(admin.firestore.Timestamp.now().toDate()),
             players: [],
         }).then(async (x) => {
             await firestore.collection('rocketranking').doc(x.id).collection("upvotes").add({ uids: [] });
@@ -67,9 +67,9 @@ exports.rocketTrackerRanking = functions.region('europe-west1').pubsub
     });
 
 
-exports.greetOlivier = functions.pubsub.schedule('every 1 minutes'/*'00 08 * * *'*/).onRun(async (context) => {
-    const from = 'Nexmo'//'41766013420';
-    const to = '41765850641';
+exports.greetOlivier = functions.pubsub.schedule('00 08 * * *').onRun(async (context) => {
+    const from = '41766013420';
+    const to = '41764666520';
     const opts = {
         "type": "unicode"
     }
