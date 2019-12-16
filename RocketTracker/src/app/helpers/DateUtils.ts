@@ -19,14 +19,14 @@ export default class DateUtils {
         let strDay: string;
         let strMonth: string;
         month = month + 1;
-        if ((String(day)).length == 1) {
+        if ((String(day)).length === 1) {
             strDay = '0' + day;
 
         } else {
 
             strDay = day.toString();
         }
-        if ((String(month)).length == 1) {
+        if ((String(month)).length === 1) {
             strMonth = '0' + month;
 
         } else {
