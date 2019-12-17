@@ -26,7 +26,8 @@ export class DailyPlayerRankingComponent implements OnInit {
 
   upVotes: Upvotes
   downVotes: Downvotes
-  rocketRankingData: { name: string, value: number, uid: string }[];
+  rocketRankingDataGood: { name: string, value: number, uid: string }[];
+  rocketRankingDataBad: { name: string, value: number, uid: string }[];
 
   options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 
@@ -61,15 +62,16 @@ export class DailyPlayerRankingComponent implements OnInit {
   ngOnChanges(changes: SimpleChanges) {
     this.rocketRankingService.GetByDate(changes.date.currentValue).subscribe(x => {
       if (x[0]) {
-        console.log(x[0].rankingDate);
         let rocketRanking = x[0];
         this.rocketRanking = rocketRanking;
-        this.rocketRankingData = this.GetRocketRankingData(rocketRanking);
+        this.rocketRankingDataGood = this.GetRocketRankingDataGood(rocketRanking);
+        this.rocketRankingDataBad = this.GetRocketRankingDataBad(rocketRanking);
+
         this.isCurrentRanking = this.IsCurrentRanking(rocketRanking);
         this.downVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.downVotes = x[0]);
         this.upVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.upVotes = x[0]);
       } else {
-        this.rocketRanking = this.rocketRankingData = null;
+        this.rocketRanking = this.rocketRankingDataGood = null;
         this.error = true;
       }
       
@@ -78,10 +80,20 @@ export class DailyPlayerRankingComponent implements OnInit {
     }, err => this.error = true);
   }
 
-  GetRocketRankingData(rocketRanking: RocketRanking) {
+  GetRocketRankingDataGood(rocketRanking: RocketRanking) {
     if (rocketRanking.players) {
       return rocketRanking.players.map((x) => {
         return { "name": x.name, "value": x.points, "uid": x.uid }
+      })
+    } else {
+      return [];
+    }
+  }
+
+  GetRocketRankingDataBad(rocketRanking: RocketRanking) {
+    if (rocketRanking.players) {
+      return rocketRanking.players.map((x) => {
+        return { "name": x.name, "value": x.badPoints, "uid": x.uid }
       })
     } else {
       return [];

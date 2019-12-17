@@ -1,15 +1,25 @@
 <div class="rankingContainer">
     <h3>{{chartTitle}}</h3>
-    <p *ngIf="notRegisteredToDailyRanking()" (click)="registerForDailyRanking()"><button type="submit" mat-raised-button><mat-icon>person_add</mat-icon></button></p>
+    <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button type="submit" mat-raised-button><mat-icon>person_add</mat-icon></button></p>
 
 
   <div *ngIf="rocketRanking && rocketRankingData; else loading">
-    
-    <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
-      [results]="rocketRankingData" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+    <div *ngIf="rocketMostValuablePlayer; else rocketLeastValuablePlayer">
+        <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
+        [results]="rocketRankingDataGood" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical>
+    </div>
+    <ng-template #rocketLeastValuablePlayer>
+      <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
+      [results]="rocketRankingDataBad" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
       [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
       [yAxisLabel]="yAxisLabel">
     </ngx-charts-bar-vertical>
+  </ng-template>
+
+   
   </div>
   <div *ngIf="rocketRanking && isCurrentRanking && upVotes && downVotes">
     <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketRankingId]="rocketRanking.id" [rocketPlayersOfTheDay]="rocketRanking.players">

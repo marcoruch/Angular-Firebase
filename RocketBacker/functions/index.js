@@ -54,15 +54,19 @@ function ToddMMyyyy(date) {
 }
 
 exports.rocketTrackerRanking = functions.region('europe-west1').pubsub
-    .schedule('01 00 * * *').onRun(async context => {
+    .schedule('22 00 * * *').onRun(async context => {
+        let timestamp = admin.firestore.Timestamp.now();
+        let dateFix = timestamp.toDate();
+        dateFix.setDate(dateFix.getDate() + 1);
+
         await firestore.collection('rocketranking').add({
             rankingDate: admin.firestore.Timestamp.now().toDate(),
-            rankingDateAsStr: ToddMMyyyy(admin.firestore.Timestamp.now().toDate()),
+            rankingDateAsStr: ToddMMyyyy(dateFix),
             players: [],
         }).then(async (x) => {
-            await firestore.collection('rocketranking').doc(x.id).collection("upvotes").add();
+            await firestore.collection('rocketranking').doc(x.id).collection("upvotes").doc("placeholder").create({ uids: []});
 
-            await firestore.collection('rocketranking').doc(x.id).collection("downvotes").add()
+            await firestore.collection('rocketranking').doc(x.id).collection("downvotes").doc("placeholder").create({ uids: []});
         })
     });
 

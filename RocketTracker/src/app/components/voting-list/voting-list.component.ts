@@ -45,11 +45,11 @@ export class VotingListComponent implements OnInit {
   }
 
   private UserCanUpvote(uids: string[], uid: string) {
-    return !(uids.filter(x => x === uid).length > 0);
+    return (!uids) || !(uids.filter(x => x === uid).length > 0);
   }
 
   private UserCanDownvote(uids: string[], uid: string) {
-    return !(uids.filter(x => x === uid).length > 0);
+    return (!uids) || !(uids.filter(x => x === uid).length > 0);
   }
 
   Upvoted(uid: string) {
@@ -57,6 +57,6 @@ export class VotingListComponent implements OnInit {
   }
 
   Downvoted(uid: string) {
-   // this.downvoteService(uid,this.userUid, this.rocketRankingId)
+    this.downvoteService.AddDownvote(uid,this.userUid, this.rocketRankingId)
   }
 }

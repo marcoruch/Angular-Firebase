@@ -30,6 +30,11 @@ export class RocketRankingService {
     
   }
 
+  GetByRankingId(id: string) {
+    return this.db.collection('rocketranking').doc<RocketRanking>(id);
+  }
+
+
   GetByDate(date: Date): Observable<RocketRanking[]> {
     // Since Querying by Date doesn't seem to function properly, each RocketRanking-Document owns an additional String-Property with the Date.
     return this.db.collection("rocketranking", ref => ref.where("rankingDateAsStr", "==", DateUtils.ToddMMyyyy(date)).limit(1)).snapshotChanges().pipe(map(actions => {
@@ -47,7 +52,7 @@ export class RocketRankingService {
     console.log(user.uid);
     this.userService.GetByUid(user.uid).get().toPromise().then((x: firestore.DocumentSnapshot) => {
       let userInfo = x.data() as AdditionalUserInfo;
-      let newPlayers = [...rocketRanking.players, {name: userInfo.name, points: 0, uid: user.uid}];
+      let newPlayers = [...rocketRanking.players, {name: userInfo.name, points: 0, badPoints: 0, uid: user.uid}];
       console.log(newPlayers);
       rocketRankingDocument.update({players: newPlayers});
     })

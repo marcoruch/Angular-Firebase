@@ -12,6 +12,7 @@ export interface RocketRanking {
 export interface RocketRankingPlayerData {
         uid: string;
         points: number;
+        badPoints: number;
         name: string;
 }
 
