@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   }
 
   FetchUserInfo(currentUser: firebase.User) {
-    this.userInfoService.GetByUid(currentUser.uid).pipe(x => this.user = x)
+    this.user = this.userInfoService.GetByUid(currentUser.uid).valueChanges()
   }
 
   ngOnInit(): void {

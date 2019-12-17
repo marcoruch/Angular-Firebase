@@ -60,9 +60,9 @@ exports.rocketTrackerRanking = functions.region('europe-west1').pubsub
             rankingDateAsStr: ToddMMyyyy(admin.firestore.Timestamp.now().toDate()),
             players: [],
         }).then(async (x) => {
-            await firestore.collection('rocketranking').doc(x.id).collection("upvotes").add({ uids: [] });
+            await firestore.collection('rocketranking').doc(x.id).collection("upvotes").add();
 
-            await firestore.collection('rocketranking').doc(x.id).collection("downvotes").add({ uids: [] })
+            await firestore.collection('rocketranking').doc(x.id).collection("downvotes").add()
         })
     });
 

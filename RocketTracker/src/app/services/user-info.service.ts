@@ -10,6 +10,7 @@ import {
     Action,
     DocumentSnapshotDoesNotExist,
     DocumentSnapshotExists,
+    DocumentSnapshot,
 } from 'angularfire2/firestore';
 
 @Injectable({
@@ -23,8 +24,8 @@ export class UserInfoService {
         this.additionalUserInfosCollection = this.db.collection('users');
     }
 
-    GetByUid(uid: string): Observable<AdditionalUserInfo> {
-        return this.additionalUserInfosCollection.doc<AdditionalUserInfo>(uid).valueChanges();
+    GetByUid(uid: string): AngularFirestoreDocument<AdditionalUserInfo> {
+        return this.additionalUserInfosCollection.doc<AdditionalUserInfo>(uid);
     }
 
     GetByUids(uids: string[]): Observable<AdditionalUserInfo[]> {

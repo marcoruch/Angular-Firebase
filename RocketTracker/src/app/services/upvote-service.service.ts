@@ -17,28 +17,26 @@ export class UpvoteService {
   }
 
   AddUpvote(uid: string, currentUserUid: string, docId: string) {
-    let docRef: AngularFirestoreCollection<Upvotes> = this.db.collection(`rocketRanking`).doc(docId).collection('downvotes');
+    this.db.collection(`rocketranking`).doc(docId).collection<Upvotes>('upvotes').get().toPromise().then((x: firebase.firestore.QuerySnapshot) => {
 
-    docRef.get().toPromise().then(x => { console.log(x.docs.length); x.docs.forEach((x) => console.log(x.data()))})
-/*
-    docRef.get().toPromise().then(x => {
+      let existingDoc: firebase.firestore.QueryDocumentSnapshot = null;
 
-      if (x.exists) {
-        let newUids: string[];
-        Object.assign(newUids, x.data().uids);
-        console.log(newUids);
-        if (x.data().uids.filter(x => x === currentUserUid).length == 0) {
-          newUids.push(currentUserUid);
-          docRef.update({ uids: newUids });
+      x.forEach((doc: firebase.firestore.QueryDocumentSnapshot) => {
+        if (doc.id === uid) {
+          existingDoc = doc;
+        }
+      })
+      if (existingDoc !== null) {
+        let data = existingDoc.data() as Upvotes;
+        if (data.uids.filter(x => x === currentUserUid).length === 0) {
+          let newData = [...data.uids, currentUserUid];
+          existingDoc.ref.update({ uids: newData });
         } else {
           console.log("This Upvote was already noted...");
         }
-      } else {
-        docRef.update({ uids: [currentUserUid] })
       }
 
-    });
-*/
+    })
   }
 
 }

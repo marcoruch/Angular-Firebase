@@ -11,14 +11,14 @@ import DateUtils from 'src/app/helpers/DateUtils';
 })
 export class HomeComponent implements OnInit {
 
-  rocketPlayers: Observable<RocketPlayer[]>
+  rocketPlayers: RocketPlayer[]
 
   CurrentDate: Date = new Date();
 
   constructor(private rocketPlayerService: RocketPlayerService) { }
 
   ngOnInit() {
-    this.rocketPlayers = this.rocketPlayerService.rocketPlayers;
+    this.rocketPlayerService.rocketPlayers.subscribe(x => this.rocketPlayers = x);
   }
 
 

@@ -1,5 +1,8 @@
 <div class="rankingContainer">
     <h3>{{chartTitle}}</h3>
+    <p *ngIf="notRegisteredToDailyRanking()" (click)="registerForDailyRanking()"><button type="submit" mat-raised-button><mat-icon>person_add</mat-icon></button></p>
+
+
   <div *ngIf="rocketRanking && rocketRankingData; else loading">
     
     <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"

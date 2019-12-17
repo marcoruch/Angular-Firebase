@@ -79,9 +79,13 @@ export class DailyPlayerRankingComponent implements OnInit {
   }
 
   GetRocketRankingData(rocketRanking: RocketRanking) {
-    return rocketRanking.players.map((x) => {
-      return { "name": x.name, "value": x.points, "uid": x.uid }
-    })
+    if (rocketRanking.players) {
+      return rocketRanking.players.map((x) => {
+        return { "name": x.name, "value": x.points, "uid": x.uid }
+      })
+    } else {
+      return [];
+    }
   }
 
   GetRocketRankingChartTitle(currentDate: Date) {
@@ -96,5 +100,16 @@ export class DailyPlayerRankingComponent implements OnInit {
       rankingDate.getFullYear() == today.getFullYear()
   }
 
+  notRegisteredToDailyRanking() {
+    if (this.rocketRanking) {
+      return this.rocketRanking.players.filter(x => x.uid == this.user.uid).length == 0;
+    } else {
+      return false;
+    }
+  }
+
+  registerForDailyRanking() {
+    this.rocketRankingService.SubscribeUser(this.rocketRanking, this.user);
+  }
 
 }

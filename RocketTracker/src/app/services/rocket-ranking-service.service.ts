@@ -14,15 +14,19 @@ import {
   Action,
   DocumentSnapshotDoesNotExist,
   DocumentSnapshotExists,
+  DocumentSnapshot,
 } from 'angularfire2/firestore';
 import { RocketPlayerService } from './rocket-player.service';
 import DateUtils from '../helpers/DateUtils';
+import { firestore } from 'firebase';
+import { UserInfoService } from './user-info.service';
+import { AdditionalUserInfo } from '../models/additional-user-info';
 @Injectable({
   providedIn: 'root'
 })
 export class RocketRankingService {
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private userService: UserInfoService) {
     
   }
 
@@ -35,5 +39,18 @@ export class RocketRankingService {
         return data;
       })
     }));
+  }
+
+  SubscribeUser(rocketRanking: RocketRanking, user: firebase.User) {
+    let rocketRankingDocument: AngularFirestoreDocument  = this.db.collection("rocketranking").doc(rocketRanking.id);
+
+    console.log(user.uid);
+    this.userService.GetByUid(user.uid).get().toPromise().then((x: firestore.DocumentSnapshot) => {
+      let userInfo = x.data() as AdditionalUserInfo;
+      let newPlayers = [...rocketRanking.players, {name: userInfo.name, points: 0, uid: user.uid}];
+      console.log(newPlayers);
+      rocketRankingDocument.update({players: newPlayers});
+    })
+    
   }
 }

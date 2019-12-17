@@ -1,7 +1,7 @@
 <ul class="voting-list" *ngIf="userCanDownvote || userCanUpvote">
   <h3>MVP Wählen</h3>
   <li *ngFor="let player of rocketPlayersOfTheDay">
-    <div>
+    <div *ngIf="player.uid !== userUid">
       <h3>{{ player.name }}</h3>
       <button title="MVP des Tages!" [disabled]="!userCanUpvote" mat-raised-button (click)="Upvoted(player.uid)">
         <mat-icon class="upvote-icon">thumb_up</mat-icon>
