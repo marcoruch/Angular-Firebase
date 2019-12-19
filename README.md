@@ -18,10 +18,13 @@
 
 - Navbar
 -- Implement Icons for different Routes
+-- Implement Score-Display
 
 - Ranking
 -- Implement Voting ability to fullest
 -- Implement Pagination (Fix Firebase Date Query, Firebase-Bug?)
+-- Implement Scheduled Function to Create a Ranking for each Day
+-- Implement 2 Views (Switch) from MVP (Most valuable Player) to LVP (Least valuable Player)
 
 - Ranking of the Month
 -- Implement Charts for MVP and Tomatoe of the Month
