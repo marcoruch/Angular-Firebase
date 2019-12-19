@@ -1,3 +1,22 @@
 <mat-toolbar>Profil</mat-toolbar>
 
-<div class="rocketPlayersContainer" *ngIf="rocketPlayers; else loading">
+<div class="profileContainer">
+  <div class="profileForm" *ngIf="user | async; else loading">
+    <mat-form-field>
+      <input [(ngModel)]="name" matInput placeholder="Spielername">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput [(ngModel)]="birthday" [matDatepicker]="picker" placeholder="Geburtsdatum">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+      <button title="Speichern" mat-raised-button (click)="SaveInformation()">
+        <mat-icon class="pager-icon">save_alt</mat-icon>
+      </button>
+  </div>
+
+  <ng-template #loading>
+    <mat-progress-bar class='loading-middle' mode="indeterminate"></mat-progress-bar>
+    Not Logged In.
+  </ng-template>
+</div>

@@ -1,0 +1,18 @@
+.profileContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 50px;
+  flex-direction: row;
+
+  .profileForm {
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
+
+.loading-middle {
+  width: 200px;
+}

@@ -1,38 +1,59 @@
 <div class="rankingContainer">
+  <div class="rankingHeader">
+    <button title="Letzter Tag" mat-raised-button (click)="LastDay()">
+      <mat-icon class="pager-icon">keyboard_arrow_left</mat-icon>
+    </button>
     <h3>{{chartTitle}}</h3>
-    <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button type="submit" mat-raised-button><mat-icon>person_add</mat-icon></button></p>
+
+    <button title="Nächster Tag" mat-raised-button (click)="NextDay()">
+      <mat-icon class="pager-icon">keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
+
+  <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button type="submit"
+      mat-raised-button>
+      <mat-icon>person_add</mat-icon>
+    </button></p>
 
 
-  <div *ngIf="rocketRanking && rocketRankingData; else loading">
-    <div *ngIf="rocketMostValuablePlayer; else rocketLeastValuablePlayer">
-        <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
-        [results]="rocketRankingDataGood" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel">
+  <div *ngIf="rocketRanking && rocketRankingDataGood || rocketRankingDataBad; else loading">
+
+    <mat-radio-group [(ngModel)]="rankingType">
+      <mat-radio-button class="example-margin" value="good">
+        Best Player (MVP)
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="bad">
+        Worst Player (LVP)
+      </mat-radio-button>
+    </mat-radio-group>
+
+    <div *ngIf="rankingType === 'good'; else rocketLeastValuablePlayer">
+      <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
+        [results]="rocketRankingDataGood" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+        [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
       </ngx-charts-bar-vertical>
     </div>
     <ng-template #rocketLeastValuablePlayer>
       <ngx-charts-bar-vertical [view]="view" [legendTitle]="legendTitle" [scheme]="colorScheme"
-      [results]="rocketRankingDataBad" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel">
-    </ngx-charts-bar-vertical>
-  </ng-template>
+        [results]="rocketRankingDataBad" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+        [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical>
+    </ng-template>
 
-   
+
   </div>
   <div *ngIf="rocketRanking && isCurrentRanking && upVotes && downVotes">
-    <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketRankingId]="rocketRanking.id" [rocketPlayersOfTheDay]="rocketRanking.players">
+    <app-voting-list [upvotes]="upVotes" [downvotes]="downVotes" [rocketRankingId]="rocketRanking.id"
+      [rocketPlayersOfTheDay]="rocketRanking.players">
     </app-voting-list>
   </div>
-
-
-
   <ng-template #loading>
-      <ng-container *ngIf="!error; else error">
-          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <ng-container *ngIf="!error; else error">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 
-      </ng-container>
+    </ng-container>
   </ng-template>
 
   <ng-template #error>

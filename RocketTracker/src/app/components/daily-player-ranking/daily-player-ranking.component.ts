@@ -3,7 +3,8 @@ import { RocketRankingService } from 'src/app/services/rocket-ranking-service.se
 import { RocketRanking } from 'src/app/models/rocket-ranking';
 import { AdditionalUserInfo } from 'src/app/models/additional-user-info';
 import { UserInfoService } from 'src/app/services/user-info.service';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 import { FirebaseError } from 'firebase';
 import { UpvoteService } from 'src/app/services/upvote-service.service';
@@ -18,11 +19,12 @@ import DateUtils from 'src/app/helpers/DateUtils';
 })
 export class DailyPlayerRankingComponent implements OnInit {
 
-  @Input() date: Date;
+  date: BehaviorSubject<Date> = new BehaviorSubject<Date>(new Date());
 
   error: boolean = false;
   user: firebase.User;
   rocketRanking: RocketRanking;
+  rankingType: string = 'good';
 
   upVotes: Upvotes
   downVotes: Downvotes
@@ -57,27 +59,26 @@ export class DailyPlayerRankingComponent implements OnInit {
   };
 
   ngOnInit() {
-  }
+    this.date.subscribe(date => {
+      this.rocketRankingService.GetByDate(date).subscribe(x => {
+        if (x[0]) {
+          let rocketRanking = x[0];
+          this.rocketRanking = rocketRanking;
+          this.rocketRankingDataGood = this.GetRocketRankingDataGood(rocketRanking);
+          this.rocketRankingDataBad = this.GetRocketRankingDataBad(rocketRanking);
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.rocketRankingService.GetByDate(changes.date.currentValue).subscribe(x => {
-      if (x[0]) {
-        let rocketRanking = x[0];
-        this.rocketRanking = rocketRanking;
-        this.rocketRankingDataGood = this.GetRocketRankingDataGood(rocketRanking);
-        this.rocketRankingDataBad = this.GetRocketRankingDataBad(rocketRanking);
+          this.isCurrentRanking = this.IsCurrentRanking(rocketRanking);
+          this.downVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.downVotes = x[0]);
+          this.upVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.upVotes = x[0]);
+        } else {
+          this.rocketRanking = this.rocketRankingDataGood = null;
+          this.error = true;
+        }
 
-        this.isCurrentRanking = this.IsCurrentRanking(rocketRanking);
-        this.downVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.downVotes = x[0]);
-        this.upVoteService.GetByRankingId(rocketRanking.id).subscribe(x => this.upVotes = x[0]);
-      } else {
-        this.rocketRanking = this.rocketRankingDataGood = null;
-        this.error = true;
-      }
-      
-      this.chartTitle = this.GetRocketRankingChartTitle(changes.date.currentValue);
+        this.chartTitle = this.GetRocketRankingChartTitle(date);
 
-    }, err => this.error = true);
+      }, err => { console.log(err); this.error = true });
+    })
   }
 
   GetRocketRankingDataGood(rocketRanking: RocketRanking) {
@@ -123,5 +124,16 @@ export class DailyPlayerRankingComponent implements OnInit {
   registerForDailyRanking() {
     this.rocketRankingService.SubscribeUser(this.rocketRanking, this.user);
   }
+
+
+  NextDay() {
+    this.date.next(DateUtils.addDays(this.date.value, 1));
+  }
+
+  LastDay() {
+    this.date.next(DateUtils.addDays(this.date.value, -1));
+
+  }
+
 
 }

@@ -12,6 +12,7 @@ import {
     DocumentSnapshotExists,
     DocumentSnapshot,
 } from 'angularfire2/firestore';
+import * as firebase from 'firebase';
 
 @Injectable({
     providedIn: 'root'
@@ -30,5 +31,13 @@ export class UserInfoService {
 
     GetByUids(uids: string[]): Observable<AdditionalUserInfo[]> {
         return this.db.collection<AdditionalUserInfo>('users', ref => ref.where('id', 'in', uids)).valueChanges();
+    }
+
+    SaveInformation(uid: string, info: AdditionalUserInfo): Promise<void> {
+        return this.additionalUserInfosCollection.doc(uid).update({
+            name: info.name,
+            age: info.age,
+            birthday: info.birthday
+        });
     }
 }

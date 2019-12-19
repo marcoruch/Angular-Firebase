@@ -1,13 +1,7 @@
 <mat-toolbar>Dashboard</mat-toolbar>
 
 <div class="statistics-container">
-  <button title="Letzter Tag" mat-raised-button (click)="LastDay()">
-    <mat-icon class="pager-icon">keyboard_arrow_left</mat-icon>
-  </button>
-  <button title="Nächster Tag" mat-raised-button (click)="NextDay()">
-    <mat-icon class="pager-icon">keyboard_arrow_right</mat-icon>
-  </button>
-  <app-daily-player-ranking [date]="CurrentDate"></app-daily-player-ranking>
+  <app-daily-player-ranking ></app-daily-player-ranking>
 </div>
 <ng-template #loading>
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>

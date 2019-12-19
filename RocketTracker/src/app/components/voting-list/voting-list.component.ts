@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { Downvotes, Upvotes } from 'src/app/models/votes';
 import { Observable, forkJoin } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
@@ -44,6 +44,19 @@ export class VotingListComponent implements OnInit {
     );
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.downvotes) {
+      this.userCanDownvote = this.UserCanDownvote(changes.downvotes.currentValue.uids, this.userUid);
+    }
+    if (changes.upvotes) {
+      console.log(changes.upvotes);
+
+      this.userCanUpvote = this.UserCanUpvote(changes.upvotes.currentValue.uids, this.userUid);
+    console.log(this.userCanUpvote);
+    }
+  }
+  
+
   private UserCanUpvote(uids: string[], uid: string) {
     return (!uids) || !(uids.filter(x => x === uid).length > 0);
   }
@@ -53,7 +66,7 @@ export class VotingListComponent implements OnInit {
   }
 
   Upvoted(uid: string) {
-     this.upvoteService.AddUpvote(uid,this.userUid, this.rocketRankingId)
+     this.upvoteService.AddUpvote(uid,this.userUid, this.rocketRankingId);
   }
 
   Downvoted(uid: string) {

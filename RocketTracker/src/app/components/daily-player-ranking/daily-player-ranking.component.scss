@@ -1,12 +1,29 @@
 .rankingContainer {
 
-  display:flex;
+  display: flex;
   flex-direction: column;
+
+  .rankingHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 14px 0px;
+    width: 600px;
+
+    h3 {
+      margin: 14px;
+      text-align: center;
+      vertical-align: middle;
+    }
+  }
 
   .ngx-charts text {
     color: #fff !important;
   }
 
+  .example-margin {
+    margin: 10px;
+  }
 }
 
 ::ng-deep .ngx-charts {

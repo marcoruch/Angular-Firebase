@@ -13,21 +13,9 @@ export class HomeComponent implements OnInit {
 
   rocketPlayers: RocketPlayer[]
 
-  CurrentDate: Date = new Date();
-
   constructor(private rocketPlayerService: RocketPlayerService) { }
 
   ngOnInit() {
     this.rocketPlayerService.rocketPlayers.subscribe(x => this.rocketPlayers = x);
-  }
-
-
-  NextDay() {
-    this.CurrentDate = DateUtils.addDays(this.CurrentDate, 1);
-  }
-
-  LastDay() {
-    this.CurrentDate = DateUtils.addDays(this.CurrentDate, -1);
-
   }
 }

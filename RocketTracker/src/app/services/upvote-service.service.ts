@@ -19,7 +19,7 @@ export class UpvoteService {
   }
 
   async AddUpvote(uid: string, currentUserUid: string, docId: string) {
-    this.db.collection(`rocketranking`).doc(docId).collection<Upvotes>('upvotes').get().toPromise().then(async (x: firebase.firestore.QuerySnapshot) => {
+    await this.db.collection(`rocketranking`).doc(docId).collection<Upvotes>('upvotes').get().toPromise().then(async (x: firebase.firestore.QuerySnapshot) => {
 
       let existingDoc: firebase.firestore.QueryDocumentSnapshot = null;
 
@@ -33,22 +33,20 @@ export class UpvoteService {
 
       let rankingDoc: firebase.firestore.DocumentSnapshot = await this.rocketRankingService.GetByRankingId(docId).get().toPromise().then(x => x);
 
-
       if (existingDoc !== null) {
         let data = existingDoc.data() as Upvotes;
         if (data.uids.filter(x => x === currentUserUid).length === 0) {
           let newData = [...data.uids, currentUserUid];
-          existingDoc.ref.update({ uids: newData });
+          await existingDoc.ref.update({ uids: newData });
           this.UpdateRocketRanking(uid, rankingDoc);
         } else {
           console.log("This Upvote was already noted...");
         }
       } else {
-        this.db.collection(`rocketranking`).doc(docId).collection<Upvotes>('upvotes').doc(uid).set({ uids: [currentUserUid] })
+        let newData = [currentUserUid];
+        await this.db.collection(`rocketranking`).doc(docId).collection<Upvotes>('upvotes').doc(uid).set({ uids: newData })
         this.UpdateRocketRanking(uid, rankingDoc)
       }
-
-
     })
   }
 
