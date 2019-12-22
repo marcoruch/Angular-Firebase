@@ -31,3 +31,6 @@
 
 - Profile
 -- Implement Ability to change Information and set Profile-Picture
+
+- Registration
+-- Remove Age and Add Birthday (optional)
