@@ -31,6 +31,8 @@
 
 - Profile
 -- Implement Ability to change Information and set Profile-Picture
+-- Implement Format Validation for Dates
+-- Implement German Format
 
 - Registration
 -- Remove Age and Add Birthday (optional)
