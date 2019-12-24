@@ -34,8 +34,8 @@
 -- Implement Format Validation for Dates
 -- Implement German Format
 
-- Registration
--- Remove Age and Add Birthday (optional)
+* Registration
+** Remove Age and Add Birthday (optional)
 
 
 ## Bugfix
