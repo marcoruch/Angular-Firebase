@@ -36,3 +36,8 @@
 
 - Registration
 -- Remove Age and Add Birthday (optional)
+
+
+## Bugfix
+-- Icons Thumbs-Up/Thumbs-Down are not correctly disabled after sucessful voting.
+-- Date format-errors can cause bad UX
