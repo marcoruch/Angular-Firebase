@@ -5,7 +5,7 @@
 ## Features
 
 - Daily Rankings
-  - Lets Users choose a "Best Player of the Day (anonymously)"
+  - Lets Users choose a "Best Player of the Day (anonymously)" ✔️
   - Display Rankings form the last x Amount of Days
 
 - Monthly Best Player
@@ -16,17 +16,17 @@
 
 ## Future Plan
 
-- Language Service
-  - Multi Language Dropdown in Navbar
-  - Translation Service with ngx-translate
-    - Pipe
-    - Directive
-    - Key
+- Language Service ✔️
+  - Multi Language Dropdown in Navbar ✔️
+  - Translation Service with ngx-translate ✔️
+    - Pipe ✔️
+    - Directive ✔️
+    - Key ✔️
 
 - Navbar
-  - Implement Icons for different Routes
+  - Implement Icons for different Routes ✔️
   - Implement Score-Display
-  - Translation Dropdown
+  - Translation Dropdown ✔️
 
 - Ranking
   - Implement Voting ability to fullest
