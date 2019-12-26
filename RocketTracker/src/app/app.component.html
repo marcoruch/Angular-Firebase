@@ -7,10 +7,15 @@
       <li class="login" *ngIf="!authService.isLoggedIn()">
         <app-login-register-modal></app-login-register-modal>
       </li>
-      <li class="loggedInButtonsHolder" *ngIf="authService.isLoggedIn()">
-        <app-user-profile-button [user]="user"></app-user-profile-button>
-        <app-logout-section></app-logout-section>
+      <li class="loggedInButtonsHolder">
+        <app-language-selector [currentUser]="user"></app-language-selector>
+
+        <ng-container *ngIf="authService.isLoggedIn()">
+          <app-user-profile-button [user]="user"></app-user-profile-button>
+          <app-logout-section></app-logout-section>
+        </ng-container>
       </li>
+
     </ul>
   </div>
 

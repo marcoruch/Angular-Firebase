@@ -49,11 +49,10 @@ export class RocketRankingService {
   SubscribeUser(rocketRanking: RocketRanking, user: firebase.User) {
     let rocketRankingDocument: AngularFirestoreDocument  = this.db.collection("rocketranking").doc(rocketRanking.id);
 
-    console.log(user.uid);
     this.userService.GetByUid(user.uid).get().toPromise().then((x: firestore.DocumentSnapshot) => {
       let userInfo = x.data() as AdditionalUserInfo;
       let newPlayers = [...rocketRanking.players, {name: userInfo.name, points: 0, badPoints: 0, uid: user.uid}];
-      console.log(newPlayers);
+  
       rocketRankingDocument.update({players: newPlayers});
     })
     

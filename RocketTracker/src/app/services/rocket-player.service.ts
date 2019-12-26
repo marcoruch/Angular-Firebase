@@ -11,6 +11,7 @@ import {
     DocumentSnapshotDoesNotExist,
     DocumentSnapshotExists,
 } from 'angularfire2/firestore';
+import { TransService } from './trans.service';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ export class RocketPlayerService {
     rocketPlayersCollection: AngularFirestoreCollection<RocketPlayer>;
     rocketPlayers: Observable<RocketPlayer[]>;
 
-    constructor(private db: AngularFirestore) {
+    constructor(private db: AngularFirestore, private transService: TransService) {
         this.rocketPlayersCollection = this.db.collection('rocketPlayers');
         this.rocketPlayers = this.rocketPlayersCollection.snapshotChanges().pipe(map(actions => {
             return actions.map(a => {

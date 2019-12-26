@@ -25,6 +25,9 @@ import { HomeComponent } from './components/home/home.component';
 import { DailyPlayerRankingComponent } from './components/daily-player-ranking/daily-player-ranking.component';
 import { NgxChartingModule } from './core/ngx-charting.module';
 import { VotingListComponent } from './components/voting-list/voting-list.component';
+import {TranslateModule} from '@ngx-translate/core';
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { VotingListComponent } from './components/voting-list/voting-list.compon
     HomeComponent,
     DailyPlayerRankingComponent,
     VotingListComponent,
+    LanguageSelectorComponent,
     /*=============*/
   ],
   imports: [
@@ -49,7 +53,8 @@ import { VotingListComponent } from './components/voting-list/voting-list.compon
     NgxChartingModule,
     FormsModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    TranslateModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

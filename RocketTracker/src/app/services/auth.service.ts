@@ -5,6 +5,7 @@ import { User } from 'firebase';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AdditionalUserInfo } from '../models/additional-user-info';
 import { EMPTY } from 'rxjs'
+import { TransService } from './trans.service';
 
 
 @Injectable({
@@ -15,7 +16,7 @@ export class AuthService {
     user: Observable<firebase.User | null>;
     usersPath: string = 'users';
 
-    constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
+    constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private transServ: TransService) {
         this.user = this.afAuth.authState;
     }
 

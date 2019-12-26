@@ -11,6 +11,8 @@ import { UpvoteService } from 'src/app/services/upvote-service.service';
 import { DownvoteService } from 'src/app/services/downvote-service.service';
 import { Downvotes, Upvotes } from 'src/app/models/votes';
 import DateUtils from 'src/app/helpers/DateUtils';
+import { TranslateService } from '@ngx-translate/core';
+import { TransService } from 'src/app/services/trans.service';
 
 @Component({
   selector: 'app-daily-player-ranking',
@@ -35,7 +37,7 @@ export class DailyPlayerRankingComponent implements OnInit {
 
   isCurrentRanking: boolean = false;
 
-  constructor(private rocketRankingService: RocketRankingService, private downVoteService: DownvoteService, private upVoteService: UpvoteService, private afAuth: AuthService) {
+  constructor(private transServ: TransService, private rocketRankingService: RocketRankingService, private downVoteService: DownvoteService, private upVoteService: UpvoteService, private afAuth: AuthService) {
     this.afAuth.user.subscribe(x => this.user = x);
   }
 

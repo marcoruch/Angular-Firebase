@@ -32,10 +32,6 @@ export class VotingListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.user.subscribe(x => console.log(x))
-    console.log(this.upvotes);
-    console.log(this.downvotes);
-    console.log(this.rocketPlayersOfTheDay);
     this.user.subscribe(user => {
       this.userUid = user.uid;
       this.userCanUpvote = this.UserCanUpvote(this.upvotes.uids, user.uid);
@@ -49,10 +45,10 @@ export class VotingListComponent implements OnInit {
       this.userCanDownvote = this.UserCanDownvote(changes.downvotes.currentValue.uids, this.userUid);
     }
     if (changes.upvotes) {
-      console.log(changes.upvotes);
+  
 
       this.userCanUpvote = this.UserCanUpvote(changes.upvotes.currentValue.uids, this.userUid);
-    console.log(this.userCanUpvote);
+   
     }
   }
   

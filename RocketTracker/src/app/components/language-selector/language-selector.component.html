@@ -1,0 +1,11 @@
+<p><button mat-raised-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button></p>
+<mat-menu #menu="matMenu">
+  <ng-container *ngFor="let language of languages">
+    <button mat-menu-item>
+      <span class="flag-icon flag-icon-{{language.icon}}"></span>
+      <span class="country-name {{language.key===currentLanguageKey.value ? 'active' : ''}}">{{language.name}}</span>
+    </button>
+  </ng-container>
+</mat-menu>

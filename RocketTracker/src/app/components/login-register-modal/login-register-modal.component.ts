@@ -44,7 +44,7 @@ export class LoginRegisterModalComponent implements OnInit {
   async submitLogin() {
     try {
       var result = await this.afAuth.passwordEmailLogin(this.username, this.password);
-
+      return result;
     } catch (error) {
       this.loginErrorMsg = error;
     }
