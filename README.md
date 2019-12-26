@@ -16,9 +16,17 @@
 
 ## Future Plan
 
+- Language Service
+  - Multi Language Dropdown in Navbar
+  - Translation Service with ngx-translate
+    - Pipe
+    - Directive
+    - Key
+
 - Navbar
   - Implement Icons for different Routes
   - Implement Score-Display
+  - Translation Dropdown
 
 - Ranking
   - Implement Voting ability to fullest
