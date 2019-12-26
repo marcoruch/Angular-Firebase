@@ -17,7 +17,7 @@ export class TransService {
     translate.use('de');
   }
 
-  private LoadLanguage(langKey: string){
+  private LoadLanguage(langKey: string) {
     try {
       this.currentTranslation = this.db.collection<Translations>('translations', ref => ref.where('key', '==', langKey).limit(1))
         .snapshotChanges()
@@ -32,17 +32,23 @@ export class TransService {
 
     catch (error) {
       console.log("Could not load Language..." + langKey, error);
-    } 
+    }
   }
 
-  SetLanguage(langKey: string) {
-    this.LoadLanguage(langKey);
-    if (!this.loadedLanguages.includes(langKey)) {
-      this.currentTranslation.subscribe((curr: Translations) => {
+  async SetLanguage(langKey: string) {
+    const promise = new Promise((resolve, reject) => {
+      this.LoadLanguage(langKey);
+      if (!this.loadedLanguages.includes(langKey)) {
+        this.currentTranslation.subscribe((curr: Translations) => {
           this.translate.setTranslation(langKey, curr.translations);
-      })
-      this.loadedLanguages.push(langKey);
-    }
-    this.translate.use(langKey);
+          resolve();
+        })
+        this.loadedLanguages.push(langKey);
+      } else {
+        resolve();
+      }
+      this.translate.use(langKey);
+    });
+    await promise;
   }
 }

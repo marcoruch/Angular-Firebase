@@ -1,9 +1,9 @@
-<p><button mat-raised-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-    <mat-icon>more_vert</mat-icon>
+<p><button matTooltip="{{'chooseLanguage' | translate}}"  mat-raised-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>language</mat-icon>
   </button></p>
 <mat-menu #menu="matMenu">
   <ng-container *ngFor="let language of languages">
-    <button mat-menu-item>
+    <button mat-menu-item (click)="changeLanguage(language.key)">
       <span class="flag-icon flag-icon-{{language.icon}}"></span>
       <span class="country-name {{language.key===currentLanguageKey.value ? 'active' : ''}}">{{language.name}}</span>
     </button>

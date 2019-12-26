@@ -37,7 +37,8 @@ export class UserInfoService {
         return this.additionalUserInfosCollection.doc(uid).update({
             name: info.name,
             age: info.age,
-            birthday: info.birthday
+            birthday: info.birthday,
+            languageKey: info.languageKey
         });
     }
 }

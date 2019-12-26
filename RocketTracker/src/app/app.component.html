@@ -2,15 +2,15 @@
   <div class="header">
     <ul>
       <li class="logo">
-        <p class="logo-text">Welcome to Rocket League Tracker</p>
+        <p matTooltip="{{'gotodashboard' | translate}}" routerLink="/" class="logo-text">Welcome to Rocket League Tracker</p>
       </li>
       <li class="login" *ngIf="!authService.isLoggedIn()">
         <app-login-register-modal></app-login-register-modal>
       </li>
       <li class="loggedInButtonsHolder">
         <app-language-selector [currentUser]="user"></app-language-selector>
-
         <ng-container *ngIf="authService.isLoggedIn()">
+          <app-dashboard-button></app-dashboard-button>
           <app-user-profile-button [user]="user"></app-user-profile-button>
           <app-logout-section></app-logout-section>
         </ng-container>

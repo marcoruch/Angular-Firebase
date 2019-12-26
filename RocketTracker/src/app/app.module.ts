@@ -27,6 +27,7 @@ import { NgxChartingModule } from './core/ngx-charting.module';
 import { VotingListComponent } from './components/voting-list/voting-list.component';
 import {TranslateModule} from '@ngx-translate/core';
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component';
+import { DashboardButtonComponent } from './components/dashboard-button/dashboard-button.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { LanguageSelectorComponent } from './components/language-selector/langua
     DailyPlayerRankingComponent,
     VotingListComponent,
     LanguageSelectorComponent,
+    DashboardButtonComponent,
     /*=============*/
   ],
   imports: [

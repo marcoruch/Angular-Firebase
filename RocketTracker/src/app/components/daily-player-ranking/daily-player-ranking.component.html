@@ -9,9 +9,6 @@
       <mat-icon class="pager-icon">keyboard_arrow_right</mat-icon>
     </button>
   </div>
-
-  <div [translate]="'HalloWelt'" ></div>
-  <div >{{'HalloWelt' | translate }}</div>
   <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button type="submit"
       mat-raised-button>
       <mat-icon>person_add</mat-icon>

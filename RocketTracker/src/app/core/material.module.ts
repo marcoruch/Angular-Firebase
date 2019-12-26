@@ -2,7 +2,9 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from '@angular/common';
 import {
     MatButtonModule, MatCardModule, MatDialogModule, MatInputModule, MatTableModule,
-    MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, MatProgressBarModule, MatChipsModule, MatRadioModule, MatDatepickerModule, MatNativeDateModule, MatSnackBarModule
+    MatToolbarModule, MatMenuModule, MatIconModule, MatProgressSpinnerModule, 
+    MatProgressBarModule, MatChipsModule, MatRadioModule, MatDatepickerModule,
+     MatNativeDateModule, MatSnackBarModule, MatSelectModule, MatTooltipModule
 } from '@angular/material';
 
 @NgModule({
@@ -36,7 +38,9 @@ import {
         MatChipsModule,
         MatRadioModule,
         MatDatepickerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatSelectModule,
+        MatTooltipModule
     ],
 })
 

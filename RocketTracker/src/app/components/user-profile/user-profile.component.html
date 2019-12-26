@@ -6,13 +6,26 @@
       <input [(ngModel)]="name" matInput placeholder="Spielername">
     </mat-form-field>
     <mat-form-field>
-        <input matInput [(ngModel)]="birthday" [matDatepicker]="picker" placeholder="Geburtsdatum">
-        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
+      <input matInput [(ngModel)]="birthday" [matDatepicker]="picker" placeholder="Geburtsdatum">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-      <button title="Speichern" mat-raised-button (click)="SaveInformation()">
-        <mat-icon class="pager-icon">save_alt</mat-icon>
-      </button>
+
+
+    <mat-form-field>
+      <mat-label>{{ 'languages' | translate }}</mat-label>
+      <mat-select [(ngModel)]="languageKey">
+        <ng-container *ngFor="let language of languages">
+          <mat-option value="{{language.key}}">{{language.name}} <span
+              class="flag-icon flag-icon-{{language.icon}}"></span></mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field>
+
+
+    <button title="Speichern" mat-raised-button (click)="SaveInformation()">
+      <mat-icon class="pager-icon">save_alt</mat-icon>
+    </button>
   </div>
 
   <ng-template #loading>
