@@ -27,6 +27,7 @@
   - Implement Icons for different Routes ✔️
   - Implement Score-Display
   - Translation Dropdown ✔️
+  - Remove Border
 
 - Ranking
   - Implement Voting ability to fullest
