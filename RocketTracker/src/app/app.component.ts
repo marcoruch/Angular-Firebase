@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(private userInfoService: UserInfoService,
     private authService: AuthService, private translationService: TransService) {
+      translationService.SetLanguage('de');
     
   }
 

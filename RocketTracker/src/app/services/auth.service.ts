@@ -16,7 +16,7 @@ export class AuthService {
     user: Observable<firebase.User | null>;
     usersPath: string = 'users';
 
-    constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private transServ: TransService) {
+    constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
         this.user = this.afAuth.authState;
     }
 

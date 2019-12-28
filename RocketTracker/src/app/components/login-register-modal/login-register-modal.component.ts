@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { AdditionalUserInfo } from '../../models/additional-user-info';
+import * as firebase from 'firebase';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class LoginRegisterModalComponent implements OnInit {
   /* model */
   email: string = '';
   username: string = '';
-  userAge?: number;
+  birthday?: Date;
   password: string = '';
   repeatPassword: string = '';
   loginErrorMsg: string = '';
@@ -53,8 +54,8 @@ export class LoginRegisterModalComponent implements OnInit {
   submitRegister() {
 
     let additionalInfo: AdditionalUserInfo = <AdditionalUserInfo> {};
-    additionalInfo.age = this.userAge;
     additionalInfo.name = this.username;
+    additionalInfo.birthday = firebase.firestore.Timestamp.fromDate(this.birthday);
     if (this.password === this.repeatPassword) {
       try {
         this.afAuth.registerEmailPassword(this.email, this.password, additionalInfo)

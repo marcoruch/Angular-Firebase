@@ -2,7 +2,7 @@
   <div class="header">
     <ul>
       <li class="logo">
-        <p matTooltip="{{'gotodashboard' | translate}}" routerLink="/" class="logo-text">Welcome to Rocket League Tracker</p>
+        <p matTooltip="{{'gotodashboard' | translate}}" routerLink="/" class="logo-text">{{ 'welcomeRocket' | translate }}</p>
       </li>
       <li class="login" *ngIf="!authService.isLoggedIn()">
         <app-login-register-modal></app-login-register-modal>
@@ -20,7 +20,7 @@
   </div>
 
   <div *ngIf="!authService.isLoggedIn(); else pageContent">
-      <mat-toolbar>Unauthentifiziert. Bitte einloggen.</mat-toolbar>
+      <mat-toolbar>{{ 'unauthenticatedPleaseLogin' | translate}}</mat-toolbar>
   </div>
   <ng-template #pageContent>
     <div class="page-content">

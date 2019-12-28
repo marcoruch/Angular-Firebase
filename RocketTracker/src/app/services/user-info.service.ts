@@ -33,10 +33,13 @@ export class UserInfoService {
         return this.db.collection<AdditionalUserInfo>('users', ref => ref.where('id', 'in', uids)).valueChanges();
     }
 
+    ChangeLanguage(uid: string, langKey: string): Promise<void> {
+        return this.additionalUserInfosCollection.doc(uid).update({ languageKey: langKey });
+    }
+
     SaveInformation(uid: string, info: AdditionalUserInfo): Promise<void> {
         return this.additionalUserInfosCollection.doc(uid).update({
             name: info.name,
-            age: info.age,
             birthday: info.birthday,
             languageKey: info.languageKey
         });

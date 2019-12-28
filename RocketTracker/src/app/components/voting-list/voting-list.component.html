@@ -1,5 +1,5 @@
 <ul class="voting-list" *ngIf="userCanDownvote || userCanUpvote">
-  <h3>MVP Wählen</h3>
+  <h3>{{ 'chooseMVP' | translate }}</h3>
   <li *ngFor="let player of rocketPlayersOfTheDay">
     <div *ngIf="player.uid !== userUid">
       <h3>{{ player.name }}</h3>

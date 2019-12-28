@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentChangeAction, Action, DocumentSnapshot } from 'angularfire2/firestore';
 import { map } from 'rxjs/operators';
 import { Translations } from '../models/translations';
 import { Observable } from 'rxjs';
+import { UserInfoService } from './user-info.service';
+import { AuthService } from './auth.service';
+import { AdditionalUserInfo } from '../models/additional-user-info';
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +15,18 @@ import { Observable } from 'rxjs';
 export class TransService {
   private currentTranslation: Observable<Translations>;
   private loadedLanguages: string[] = [];
+  private userInfo: AdditionalUserInfo;
+  private user: firebase.User;
 
-  constructor(private translate: TranslateService, private db: AngularFirestore) {
+  constructor(private translate: TranslateService, private db: AngularFirestore, private userService: UserInfoService, authService: AuthService) {
     translate.setDefaultLang('de');
     translate.use('de');
+    authService.user.subscribe(user => {
+      this.user = user;
+      this.userService.GetByUid(user.uid).snapshotChanges().subscribe(x => {
+        this.userInfo = x.payload.data() as AdditionalUserInfo;
+      })
+    });
   }
 
   private LoadLanguage(langKey: string) {
@@ -47,6 +59,13 @@ export class TransService {
       } else {
         resolve();
       }
+
+      if (typeof this.user !== "undefined") {
+        if (typeof this.userInfo !== "undefined" && this.userInfo.languageKey !== langKey) {
+          this.userService.ChangeLanguage(this.user.uid, langKey);
+        }
+      }
+
       this.translate.use(langKey);
     });
     await promise;

@@ -9,7 +9,7 @@
       <mat-icon class="pager-icon">keyboard_arrow_right</mat-icon>
     </button>
   </div>
-  <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button type="submit"
+  <p *ngIf="notRegisteredToDailyRanking() && isCurrentRanking" (click)="registerForDailyRanking()"><button title="{{ 'AddMeToPlayers' | translate}}" type="submit"
       mat-raised-button>
       <mat-icon>person_add</mat-icon>
     </button></p>
@@ -19,10 +19,10 @@
 
     <mat-radio-group [(ngModel)]="rankingType">
       <mat-radio-button class="example-margin" value="good">
-        Best Player (MVP)
+        {{ 'bestPlayer' | translate }} (MVP)
       </mat-radio-button>
       <mat-radio-button class="example-margin" value="bad">
-        Worst Player (LVP)
+        {{ 'worstPlayer' | translate }} (LVP)
       </mat-radio-button>
     </mat-radio-group>
 
