@@ -50,3 +50,4 @@
 ## Bugfix
 - Icons Thumbs-Up/Thumbs-Down are not correctly disabled after sucessful voting.
 - Date format-errors can cause bad UX
+- Registering => bind Birthday or make optional
