@@ -51,8 +51,13 @@ export class LoginRegisterModalComponent implements OnInit {
     }
   }
 
-  submitRegister() {
 
+  onChangeEvent(e): void {
+    this.birthday = e.target.value;
+  }
+
+
+  submitRegister() {
     let additionalInfo: AdditionalUserInfo = <AdditionalUserInfo> {};
     additionalInfo.name = this.username;
     additionalInfo.birthday = firebase.firestore.Timestamp.fromDate(this.birthday);

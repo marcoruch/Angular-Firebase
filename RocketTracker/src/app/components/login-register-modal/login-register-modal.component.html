@@ -69,7 +69,7 @@
           <tr>
               <td>
                 <mat-form-field>
-                  <input matInput [(ngModel)]="birthday" [matDatepicker]="picker" placeholder="Geburtsdatum">
+                  <input matInput [(ngModel)]="birthday" [matDatepicker]="picker" (dateChange)="onChangeEvent($event)" placeholder="Geburtsdatum">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
